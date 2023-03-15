@@ -10,23 +10,23 @@ import java.util.Properties;
 public class MyDataSourceFactory {
 
     public static DataSource getDataSource() {
-        Properties props = new Properties();
-        InputStream fis;
-        BasicDataSource ds = new BasicDataSource();
+        Properties properties = new Properties();
+        InputStream inputStream;
+        BasicDataSource dataSource = new BasicDataSource();
 
         try {
-            fis = MyDataSourceFactory.class.getClassLoader().getResourceAsStream("db.properties");
-            props.load(fis);
+            inputStream = MyDataSourceFactory.class.getClassLoader().getResourceAsStream("db.properties");
+            properties.load(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
 
-        ds.setDriverClassName(props.getProperty("DB_DRIVER_CLASS"));
-        ds.setUrl(props.getProperty("DB_URL"));
-        ds.setUsername(props.getProperty("DB_USERNAME"));
-        ds.setPassword(props.getProperty("DB_PASSWORD"));
-        return ds;
+        dataSource.setDriverClassName(properties.getProperty("DB_DRIVER_CLASS"));
+        dataSource.setUrl(properties.getProperty("DB_URL"));
+        dataSource.setUsername(properties.getProperty("DB_USERNAME"));
+        dataSource.setPassword(properties.getProperty("DB_PASSWORD"));
+        return dataSource;
     }
 
 }
